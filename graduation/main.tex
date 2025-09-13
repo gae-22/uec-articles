@@ -1,0 +1,28 @@
+\newif\ifjapanese
+\documentclass[11pt, dvipdfmx]{jreport}
+\bibliographystyle{jplain_url}
+
+% プリアンブル設定を読み込み
+\input{_preamble}
+
+\begin{document}
+
+\jmaketitle	% 表紙
+\include{src/00_abstract}	% アブストラクト
+
+\tableofcontents  % 題目次
+\listoffigures    % 図目次
+\listoftables     % 表目次
+
+\include{src/01}  % 第1章
+\include{src/02}  % 第2章
+
+\include{src/97_acknowledgment}  % 謝辞
+\bibliography{src/98_main}  % 参考文献
+
+% \section*{発表予定}
+%     角田真一朗, 山崎悠大, 片桐啓太, 藤井威生, 田久修, 太田真衣, 安達宏一, ``複数チャネル環境下における干渉電力分布を用いたLPWA向けチャネル選択手法の検討, " 信学総大, B--17--26, Mar. 2021.
+
+%\include{appendix}		    % 付録
+
+\end{document}
