@@ -35,14 +35,34 @@
     #header[既存研究]
 
     - 事後対応的制御
-        - RSSI#footnote[RSSI: Received Signal Strength Indicator (受信信号強度指標)]・SINR#footnote[SINR: Signal to Interference plus Noise Ratio (信号対干渉雑音比)]などの品質劣化を観測後に制御
-        - #adv[予測不能な変化に対応可能]
-        - 検知から切り替えまでの#dadv[遅延で通信断発生]
+        - RSSI#footnote[RSSI: Received Signal Strength Indicator (受信信号強度指標)]・SINR#footnote[SINR: Signal to Interference plus Noise Ratio (信号対干渉雑音比)]などの品質劣化を観測後に制御 #custom_cite(<0001>)
+        - #adv[急激な変化に対応可能]だが検知から切り替えまでの#dadv[遅延で通信断発生]
 
     - 事前対応的制御
-        - 移動軌跡予測に基づく事前のバンド切り替え
-        - 理論上は通信瞬断を#adv[未然に防止]
-        - 予測精度に性能が#dadv[大きく依存]
+        - 移動軌跡予測に基づく事前のバンド切り替え #custom_cite(<0003>)
+        - 理論上は通信瞬断を#adv[未然に防止]可能だが予測精度に性能が#dadv[大きく依存]
+]
+
+#slide[
+    #header[研究目的]
+
+    - V2X通信における通信安定化手法の提案
+        - ミリ波とSub-6GHzの連携による再送およびバンド切り替え
+            - 通信失敗時にSub-6GHzで再送
+            - SINR閾値による動的制御切り替え
+
+    #v(30mm)
+
+    #align(center)[
+        #box(
+            stroke: 6pt + luma(150),
+            width: 85%,
+            inset: 32pt,
+            radius: 6pt,
+        )[
+            状況適応型制御により#adv[通信品質と効率性の両立]
+        ]
+    ]
 ]
 
 #slide[
@@ -196,6 +216,16 @@
     - 今後の研究方針
         - 送信失敗時のSub-6GHzによる再送の効果検証
         - SINR閾値によるバンド切り替えの検証
+]
+
+#slide[
+    #header[参考文献]
+    #set text(size: tiny)
+    #bibliography(
+        "main.bib",
+        title: none,
+        style: "ieee",
+    )
 ]
 
 #appendix_title_slide()

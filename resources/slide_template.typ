@@ -188,6 +188,21 @@
     }
 }
 
+// カスタム引用カウンター
+#let cite_counter = counter("my-cite")
+
+// カスタム引用関数（IEEE標準形式、footnote位置）
+#let custom_cite(key) = {
+    cite_counter.step()
+    context {
+        let cite_num = cite_counter.get().at(0)
+        [\[#cite_num\]]
+
+        // footnoteを使用するが、番号は非表示にして引用情報のみ表示
+        footnote(numbering: _ => none)[#cite(key, form: "full")]
+    }
+}
+
 #let no_counted_pages = counter("no_counted_pages")
 #let appendix_slide(body) = {
     set page(footer: context [
