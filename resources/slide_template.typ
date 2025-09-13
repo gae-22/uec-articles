@@ -11,7 +11,8 @@
 #let small = 20pt
 #let tiny = 18pt
 
-#let gothic_font_ja = "Meiryo UI"
+#let gothic_font_ja = ("Hiragino Sans", "Noto Sans CJK JP", "BIZ UDGothic", "YuGothic")
+#let mincho_font_ja = ("Hiragino Mincho ProN", "Noto Serif CJK JP", "BIZ UDMincho", "YuMincho")
 #let math_font = "New Computer Modern Math"
 
 // フォントの色定義(RGB)
@@ -47,9 +48,11 @@
     // フォント
     set text(
         font: (
-            (name: gothic_font_ja, covers: regex("[\p{scx:Latin}0-9]")),
-            (name: math_font, covers: regex("[\p{scx:Greek}]")),
-            (name: gothic_font_ja, covers: regex("[^\\p{scx:Latin}\\p{scx:Greek}]")),
+            "Hiragino Sans",
+            "Noto Sans CJK JP",
+            "BIZ UDGothic",
+            "YuGothic",
+            "New Computer Modern Math",
         ),
         size: normal,
         weight: "regular",
@@ -57,9 +60,9 @@
 
     // 箇条書き
     set list(marker: (
-        [#text(size: 16pt)[$square.filled.big$]],
-        [#text(size: 16pt)[$diamond.filled$]],
-        [#scale(x: 100%, y: 180%)[\u{27A2}]],
+        [#text(size: 12pt)[$square.filled$]],
+        [#text(size: tiny)[$diamond.filled$]],
+        [#scale(x: 100%, y: 180%)[#text(font: "Arial")[\u{27A2}]]],
         [#text(size: tiny)[$bold(circle.filled.small)$]],
         [✔️],
         [・],
@@ -84,7 +87,7 @@
 
 
     // 数式のスタイル
-    show math.equation: set text(font: math_font, size: normal)
+    show math.equation: set text(font: "New Computer Modern Math", size: normal)
     set math.equation(numbering: "(1)", number-align: (right + bottom), supplement: "式")
 
     // スライドのスタイル
