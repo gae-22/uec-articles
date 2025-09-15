@@ -5,7 +5,7 @@
     title_ja: [V2X向けマルチバンド連携による \ 通信安定化手法の研究],
     authors: (),
     cite: [],
-    date: [2025/09/16],
+    date: [],
 )
 
 #slide[

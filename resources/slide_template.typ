@@ -4,7 +4,7 @@
 #import "@preview/physica:0.9.3": *
 
 // フォントサイズ
-#let title_size = 32pt
+#let title_size = 42pt
 #let large = 26pt
 #let medium = 24pt
 #let normal = 22pt
@@ -42,7 +42,8 @@
 )
 
 #let project(title_en: "", title_ja: "", authors: "", cite: "", date: "", body) = {
-    set document(author: "鐘ヶ江 僚太", title: "集中輪講第2回")
+    let date_meta = datetime.today()
+    set document(author: "鐘ヶ江 僚太", title: title_ja, date: date_meta)
     set page(paper: "presentation-4-3", margin: (top: 10mm, left: 15mm, right: 15mm, bottom: 5mm))
 
     // フォント
@@ -87,7 +88,7 @@
 
 
     // 数式のスタイル
-    show math.equation: set text(font: "New Computer Modern Math", size: normal)
+    show math.equation: set text(font: math_font, size: normal)
     set math.equation(numbering: "(1)", number-align: (right + bottom), supplement: "式")
 
     // スライドのスタイル
@@ -110,11 +111,13 @@
             #text(size: title_size)[#title_ja] \ #v(20mm)
             #text(size: normal)[#date] \ #v(4mm)
             #text(size: 20pt)[
-                電気通信大学 \
+                電気通信大学 情報理工学域\
+                #numbering("I", 2)類(融合系) 情報通信工学プログラム \
                 先端ワイヤレス・コミュニケーション研究センター (AWCC) \
                 藤井研究室 \
-                2210177 B4 鐘ヶ江 僚太 \
-                #link("mailto: kanegae@awcc.uec.ac.jp") \
+                指導教員：藤井 威生 教授 \
+                2210177 鐘ヶ江 僚太 \
+                Email:#link("mailto: kanegae@awcc.uec.ac.jp") \
             ]
 
 
