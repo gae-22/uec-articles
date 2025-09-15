@@ -239,13 +239,110 @@
     )
 ]
 
-// #appendix_title_slide()
+#appendix_title_slide()
 
-// #appendix_slide[
-//     #header[補足：シミュレーション結果 - スループットの分布]
+#appendix_slide[
+    #header[補足：シミュレーション結果 - スループットの分布]
 
-//     #figure(
-//         image("images/throughput_distribution_shape_analysis.png", width: 80%),
-//         caption: [ミリ波とSub-6GHzのスループットのシミュレーション結果の比較],
-//     )<fig:throughput>
-// ]
+    #figure(
+        image("images/throughput_distribution_shape_analysis.png", width: 90%),
+        caption: [ミリ波とSub-6GHzのスループットのシミュレーション結果の比較],
+    )<fig:throughput>
+]
+
+#appendix_slide[
+    #header[補足：3GPP TS 38.901 UMi Street Canyonモデル]
+
+    - UMi (Urban Micro-cell) Street Canyon チャネルモデル
+        - 都市部の道路（峡谷状の環境）を模擬
+        - 建物間の狭い道路での電波伝搬特性をモデル化
+
+    - 主な特徴
+        - 見通し(LOS)と非見通し(NLOS)の両方をサポート
+        - 車両による遮蔽効果を考慮
+        - 距離減衰、シャドウイング、高速フェージングを含む
+
+    #figure(
+        caption: [UMi Street Canyonモデルのパラメータ],
+        table(
+            columns: 3,
+            table.hline(),
+            [項目], table.vline(), [#qty(28, "GHz")], [#qty(3.5, "GHz")],
+            table.hline(),
+            [パスロス指数], [$2.1$ (LOS)], [$2.0$ (LOS)],
+            [シャドウイング標準偏差], [$#qty(3, "dB")$], [$#qty(4, "dB")$],
+            [遮蔽損失], [$20 - 30 #unit("dB")$], [$10 - 15 #unit("dB")$],
+            table.hline(),
+        ),
+    )
+]
+
+#appendix_slide[
+    #header[補足：質疑応答想定集 (1/2) - 技術的質問]
+
+    #set text(size: small)
+
+    #strong[Q1: SINR閾値はどのように決定するのか？]
+    - 3GPPの要求水準値や初期検討結果を参考に設定
+    - ミリ波で安定通信が困難になるSINR値を基準として閾値を決定する予定
+
+    #strong[Q2: 車線変更はどのようにモデル化しているか？]
+    - ランダムな車線変更を仮定
+    - 実際の交通流を考慮したより詳細なモデル化は今後の課題
+
+    #strong[Q3: 遅延やオーバーヘッドは考慮しているか？]
+    - 現在の初期検討では考慮していない
+    - 今後の実装では、バンド切り替えや再送による遅延などを定量的に評価する予定
+
+    #strong[Q4: 実用化に向けた課題は何か？]
+    1. デュアルバンド対応端末の普及
+    2. リアルタイム制御の実装複雑性
+
+    #strong[Q5: ドローン通信への適用性は？]
+    - 3次元移動や高度変化による伝搬特性の違いを考慮する必要がある
+]
+
+#appendix_slide[
+    #header[補足：質疑応答想定集 (2/2) - 実用性・今後の展開]
+
+    #set text(size: small)
+
+    #strong[Q6: 他の周波数帯との組み合わせは考えているか？]
+    - 現時点では考えていないが，より高速で安定化が期待できる場合は検討
+
+    #strong[Q7: 今後の実験計画は？]
+    - シミュレーション評価の拡張
+    - ミリ波通信を基本としつつSub-6GHzによる再送
+    - SINR閾値の決定とバンド切り替えの検証
+]
+
+#appendix_slide[
+    #header[補足：シミュレーション環境詳細]
+    #set text(size: tiny)
+
+    - *SUMO* (Simulation of Urban MObility)
+        - 交通流シミュレータ
+        - 車両の移動軌跡、車線変更、速度制御を模擬
+
+    - *OMNeT++*
+        - ネットワークシミュレーションフレームワーク
+        - 通信プロトコル、電波伝搬、パケット伝送を模擬
+
+    - *Veins* (Vehicles in Network Simulation)
+        - SUMOとOMNeT++を連携するフレームワーク
+        - V2X通信シミュレーション専用に設計
+
+    #figure(
+        caption: [シミュレータ連携構成],
+        table(
+            columns: 3,
+            table.hline(),
+            [ツール], table.vline(), [役割], table.vline(), [主な機能],
+            table.hline(),
+            [SUMO], [交通流], [車両移動、車線変更],
+            [OMNeT++], [通信], [電波伝搬、プロトコル],
+            [Veins], [統合], [SUMO-OMNeT++連携],
+            table.hline(),
+        ),
+    )
+]
