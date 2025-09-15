@@ -11,7 +11,7 @@
 #let small = 20pt
 #let tiny = 18pt
 
-#let gothic_font_ja = ("Hiragino Sans", "Noto Sans CJK JP", "BIZ UDGothic", "YuGothic")
+#let gothic_font_ja = ("Hiragino Gothic ProN", "Noto Sans CJK JP", "BIZ UDGothic", "YuGothic")
 #let mincho_font_ja = ("Hiragino Mincho ProN", "Noto Serif CJK JP", "BIZ UDMincho", "YuMincho")
 #let math_font = "New Computer Modern Math"
 
@@ -199,7 +199,11 @@
         [\[#cite_num\]]
 
         // footnoteを使用するが、番号は非表示にして引用情報のみ表示
-        footnote(numbering: _ => none)[#cite(key, form: "full")]
+        footnote(numbering: _ => none)[
+            #text(size: tiny, font: "Arial")[
+                #cite(key, form: "full", style: "ieee")
+            ]
+        ]
     }
 }
 

@@ -15,7 +15,9 @@
         - 自動車・路側機・歩行者間でのリアルタイム通信を可能にする技術
             - #adv[衝突回避]や#adv[渋滞緩和]につながる
 
-    - ミリ波とSub-6GHzの特性
+    - V2X通信に用いられる周波数帯
+        - Sub-6GHz帯：#dadv[低速]だが#adv[安定]な通信
+        - ミリ波帯：#adv[高速]だが#dadv[不安定]な通信
     #figure(
         caption: [ミリ波とSub-6GHzの特性比較],
         table(
@@ -36,11 +38,13 @@
 
     - 事後対応的制御
         - RSSI#footnote[RSSI: Received Signal Strength Indicator (受信信号強度指標)]・SINR#footnote[SINR: Signal to Interference plus Noise Ratio (信号対干渉雑音比)]などの品質劣化を観測後に制御 #custom_cite(<0001>)
-        - #adv[急激な変化に対応可能]だが検知から切り替えまでの#dadv[遅延で通信断発生]
+        - #adv[急激な変化に対応可能]
+        - 検知から切り替えまでの#dadv[遅延で通信断発生]
 
     - 事前対応的制御
         - 移動軌跡予測に基づく事前のバンド切り替え #custom_cite(<0003>)
-        - 理論上は通信瞬断を#adv[未然に防止]可能だが予測精度に性能が#dadv[大きく依存]
+        - 理論上は通信瞬断を#adv[未然に防止]可能
+        - 予測精度に性能が#dadv[大きく依存]
 ]
 
 #slide[
@@ -49,7 +53,7 @@
     - V2X通信における通信安定化手法の提案
         - ミリ波とSub-6GHzの連携による再送およびバンド切り替え
             - 通信失敗時にSub-6GHzで再送
-            - SINR閾値による動的制御切り替え
+            - SINR閾値による動的な帯域切り替え
 
     #v(30mm)
 
@@ -60,7 +64,7 @@
             inset: 32pt,
             radius: 6pt,
         )[
-            状況適応型制御により#adv[通信品質と効率性の両立]
+            動的な帯域切り替えにより#adv[通信品質と効率性の両立]
         ]
     ]
 ]
@@ -68,18 +72,15 @@
 #slide[
     #header[シミュレーションモデル]
 
-    - チャネルモデル：3GPP TS 38.901 UMi Street Canyon
+    - チャネルモデル：3GPP TS 38.901 UMi Street Canyon #custom_cite(<0007>)
     - 環境設定
-        - 道路長 $L = #qty(2000, "m", thousandsep: "#h(0.1em)")$
-        - 送受信車両1台ずつ + 一般車両35台 + 大型車両8台
+        - 道路長 $L = #qty(2, "km", thousandsep: "#h(0.1em)")$
+        - 送受信車両 $1$ 台ずつ + 一般車両 $35$ 台 + 大型車両 $8$ 台
         - 送受信車両速度： #qty(60, "km/h", per: "\/")、初期距離： #qty(50, "m")
         - 車両はランダムに車線変更する
-    - 通信パラメータ
-        - ミリ波：#qty(28, "GHz")帯（帯域幅 #qty(100, "MHz")）
-        - Sub-6GHz：#qty(3.5, "GHz")帯（帯域幅 #qty(20, "MHz")）
 
     #figure(
-        image("images/model.drawio.png", width: 40%),
+        image("images/model.drawio.png", width: 43%),
         caption: [シミュレーションモデル],
     )<label>
 ]
@@ -95,11 +96,11 @@
             $B_"Rx"$：受信成功ビット数、$T$：観測時間
         ]]
 
-    - シミュレータ：SUMO，Omnet++，Veins
-        - 交通シミュレーション + 通信品質評価の統合環境
-            - SUMO: 交通シミュレータ
-            - Omnet++: ネットワークシミュレータ
-            - Veins: SUMOとOmnet++の連携フレームワーク
+    // - シミュレータ：SUMO，Omnet++，Veins
+    //     - 交通シミュレーション + 通信品質評価の統合環境
+    //         - SUMO: 交通シミュレータ
+    //         - Omnet++: ネットワークシミュレータ
+    //         - Veins: SUMOとOmnet++の連携フレームワーク
 ]
 
 #slide[
@@ -174,8 +175,8 @@
             [大型車両数], [$8$ 台],
             [一般車両速度], [$40$ -- #qty(60, "km/h", per: "\/")],
             [大型車両速度], [$40$ -- #qty(50, "km/h", per: "\/")],
-            [#qty(28, "GHz")帯域幅], [#qty(100, "MHz")],
-            [#qty(3.5, "GHz")帯域幅], [#qty(20, "MHz")],
+            [ミリ波], [#qty(28, "GHz")帯 (#qty(100, "MHz"))],
+            [Sub- #qty(6, "GHz")], [#qty(3.5, "GHz")帯 (#qty(20, "MHz"))],
             table.hline(),
         ),
     )<label>
@@ -184,18 +185,28 @@
 #slide[
     #header[シミュレーション結果 - SINRの比較]
 
+    - ミリ波の不安定性とSub-6GHzの安定性を確認
+
     #figure(
         image("images/sinr_comprehensive_analysis.png", width: 80%),
-        caption: [ミリ波とSub-6GHzのSINRのシミュレーション結果の比較],
+        caption: [
+            ミリ波とSub-6GHzのSINRのシミュレーション結果の比較 \
+            点線：3GPPにおけるSINRの要求水準値
+        ],
     )<fig:sinr>
 ]
 
 #slide[
     #header[シミュレーション結果 - スループットの比較]
 
+    - ミリ波の高速通信の優位性とSub-6GHzの安定性を確認
+
     #figure(
         image("images/harq_comprehensive_analysis.png", width: 80%),
-        caption: [ミリ波とSub-6GHzのスループットのシミュレーション結果の比較],
+        caption: [
+            ミリ波とSub-6GHzのスループットのシミュレーション結果の比較 \
+            点線：平均スループット値
+        ],
     )<fig:throughput>
 ]
 
@@ -220,21 +231,21 @@
 
 #slide[
     #header[参考文献]
-    #set text(size: tiny)
+    #set text(size: tiny, font: "Arial")
     #bibliography(
         "main.bib",
-        title: none,
         style: "ieee",
+        title: none,
     )
 ]
 
-#appendix_title_slide()
+// #appendix_title_slide()
 
-#appendix_slide[
-    #header[補足：シミュレーション結果 - スループットの分布]
+// #appendix_slide[
+//     #header[補足：シミュレーション結果 - スループットの分布]
 
-    #figure(
-        image("images/throughput_distribution_shape_analysis.png", width: 80%),
-        caption: [ミリ波とSub-6GHzのスループットのシミュレーション結果の比較],
-    )<fig:throughput>
-]
+//     #figure(
+//         image("images/throughput_distribution_shape_analysis.png", width: 80%),
+//         caption: [ミリ波とSub-6GHzのスループットのシミュレーション結果の比較],
+//     )<fig:throughput>
+// ]
