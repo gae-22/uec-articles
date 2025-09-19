@@ -11,7 +11,7 @@
 #let small = 20pt
 #let tiny = 18pt
 
-#let gothic_font_ja = ("Hiragino Gothic ProN", "Noto Sans CJK JP", "BIZ UDGothic", "YuGothic")
+#let gothic_font_ja = ("Hiragino Gothic ProN", "Noto Sans CJK JP", "BIZ UDGothic", "YuGothic", "Arial")
 #let mincho_font_ja = ("Hiragino Mincho ProN", "Noto Serif CJK JP", "BIZ UDMincho", "YuMincho")
 #let math_font = "New Computer Modern Math"
 
@@ -48,13 +48,7 @@
 
     // フォント
     set text(
-        font: (
-            "Hiragino Sans",
-            "Noto Sans CJK JP",
-            "BIZ UDGothic",
-            "YuGothic",
-            "New Computer Modern Math",
-        ),
+        font: gothic_font_ja,
         size: normal,
         weight: "regular",
     )

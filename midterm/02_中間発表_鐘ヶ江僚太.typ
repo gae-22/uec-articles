@@ -74,10 +74,9 @@
 
     - チャネルモデル：UMi Street Canyon モデル #custom_cite(<0007>)
     - 環境設定
-        - 道路長 $L = #qty(2, "km", thousandsep: "#h(0.1em)")$
         - 送受信車両 $1$ 台ずつ + 一般車両 $35$ 台 + 大型車両 $8$ 台
         - 送受信車両速度： #qty(60, "km/h", per: "\/")、初期距離： #qty(50, "m")
-        - 車両はランダムに車線変更する
+        - 全車両はランダムに車線変更する
 
     #figure(
         image("images/model.drawio.png", width: 43%),
@@ -86,14 +85,12 @@
 ]
 
 #slide[
-    #header[シミュレーション条件と評価手法]
+    #header[評価指標]
 
     - 評価指標
         $ "SINR [dB]" = 10 log_(10) (P_"s" / (P_"i" + P_"n")) $
-        $ "Throughput [bps]" = B_"Rx" / T $
         #align(center)[#text(tiny)[
             $P_"s"$：受信信号電力、$P_"i"$：干渉信号電力、$P_"n"$：ノイズ電力 \
-            $B_"Rx"$：受信成功ビット数、$T$：観測時間
         ]]
 
     // - シミュレータ：SUMO，Omnet++，Veins
