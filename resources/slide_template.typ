@@ -202,6 +202,7 @@
             ]
         ]
     }
+    counter(footnote).update(n => n - 1)
 }
 
 #let no_counted_pages = counter("no_counted_pages")
